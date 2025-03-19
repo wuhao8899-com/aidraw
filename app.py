@@ -3,10 +3,14 @@ import os.path
 from libs.helper import *
 import streamlit as st
 import uuid
-import pandas as pd
+#数据分析的库
+import pandas as pd 
 import openai
+#用来处理请求https的库,Response这个是用来响应https的库
 from requests.models import ChunkedEncodingError
+#流式组件的库
 from streamlit.components import v1
+#语音工具的库
 from voice_toolkit import voice_toolkit
 
 if "apibase" in st.secrets:
