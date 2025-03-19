@@ -125,6 +125,7 @@ def reset_chat_name_fun(chat_name):
 
 
 def create_chat_fun():
+    # 合并两个表的数据
     st.session_state["history_chats"] = [
         "New Chat_" + str(uuid.uuid4())
     ] + st.session_state["history_chats"]
