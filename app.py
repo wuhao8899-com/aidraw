@@ -61,6 +61,7 @@ with st.sidebar:
     # 创建容器的目的是配合自定义组件的监听操作
     chat_container = st.container()
     with chat_container:
+        # 每回返回当前选择的是谁的名字，是哪个聊天
         current_chat = st.radio(
             label="历史聊天窗口",
             format_func=lambda x: x.split("_")[0] if "_" in x else x,
@@ -77,6 +78,7 @@ with st.sidebar:
 # 数据写入文件
 def write_data(new_chat_name=current_chat):
     if "apikey" in st.secrets:
+        # 每回保留当前映射的是谁
         st.session_state["paras"] = {
             "temperature": st.session_state["temperature" + current_chat],
             "top_p": st.session_state["top_p" + current_chat],
@@ -88,6 +90,7 @@ def write_data(new_chat_name=current_chat):
             "context_input": st.session_state["context_input" + current_chat],
             "context_level": st.session_state["context_level" + current_chat],
         }
+        # 保存json数据
         save_data(
             st.session_state["path"],
             new_chat_name,
@@ -100,6 +103,8 @@ def write_data(new_chat_name=current_chat):
 def reset_chat_name_fun(chat_name):
     chat_name = chat_name + "_" + str(uuid.uuid4())
     new_name = filename_correction(chat_name)
+    # 下面的那个方法是st.session_state["history_chats"] = ["chat1", "chat2", "chat3"]找指定元素的方法  index = st.session_state["history_chats"].index(current_chat)
+    # print(index)  # 输出 1
     current_chat_index = st.session_state["history_chats"].index(current_chat)
     st.session_state["history_chats"][current_chat_index] = new_name
     st.session_state["current_chat_index"] = current_chat_index
