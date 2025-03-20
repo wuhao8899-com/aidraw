@@ -221,6 +221,7 @@ if any(st.session_state["delete_dict"].values()):
             delete_keys = key
             st.session_state["delete_count"] = deleteCount + 1
             delete_current_chat, idr = delete_keys.split(">")
+            # 按照pd.DataFrame的某种规则排列
             df_history_tem = pd.DataFrame(
                 st.session_state["history" + delete_current_chat]
             )
@@ -234,6 +235,7 @@ if any(st.session_state["delete_dict"].values()):
                 .index,
                 inplace=True,
             )
+            # 再次转化伟字典的格式
             st.session_state["history" + delete_current_chat] = df_history_tem.to_dict(
                 "records"
             )
