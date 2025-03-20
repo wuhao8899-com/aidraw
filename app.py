@@ -116,6 +116,7 @@ def reset_chat_name_fun(chat_name):
         "context_select",
         "context_input",
         "context_level",
+        #加个*是解包把这个表格的内容展开
         *initial_content_all["paras"],
     ]:
         st.session_state[item + new_name + "value"] = st.session_state[
